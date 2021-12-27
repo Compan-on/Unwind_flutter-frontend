@@ -1,4 +1,4 @@
-import 'package:companion/services/firebase_service.dart';
+import 'package:companion/services/auth.dart';
 import 'package:companion/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +139,7 @@ class _GoogleSignInState extends State<GoogleSignIn> {
           FirebaseService service = new FirebaseService();
           try {
            await service.signInwithGoogle();
-           Navigator.pushNamedAndRemoveUntil(context, Constants.homeNavigate, (route) => false);
+           Navigator.pushNamedAndRemoveUntil(context, Constants.registerPage1, (route) => false);
           } catch(e){
             if(e is FirebaseAuthException){
               showMessage(e.message!);
