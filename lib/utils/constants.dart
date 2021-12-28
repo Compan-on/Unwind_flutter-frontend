@@ -12,22 +12,26 @@ class Constants {
 
   //text
   static const title = "Google Sign In";
-  static const textIntro = "Growing your \n business is ";
-  static const textIntroDesc1 = "easier \n ";
-  static const textIntroDesc2 = "then you think!";
+  static const textIntro = "Sharing how you feel \n";
+  static const textIntroDesc1 = "is easier \n ";
+  static const textIntroDesc2 = "than you think!";
   static const textSmallSignUp = "Sign up takes only 2 minutes!";
   static const textSignIn = "Sign In";
-  static const textStart = "Get Started";
+  static const textStart = "Continue";
   static const textSignInTitle = "Welcome back!";
-  static const textSmallSignIn = "You've been missed";
+  static const textSmallSignIn = "We are here to listen";
   static const textSignInGoogle = "Sign In With Google";
   static const textAcc = "Don't have an account? ";
   static const textSignUp = "Sign Up here";
   static const textHome = "Home";
+  static const textContinue = 'Continue';
+  static const textUsername1 = "Enter a name that defines \n";
+  static const textUsername2 = "YOU";
 
   //navigate
   static const signInNavigate = '/sign-in';
   static const homeNavigate = '/home';
+  static const registerPage1 = 'register1';
 
   static const statusBarColor = SystemUiOverlayStyle(
       statusBarColor: Constants.kPrimaryColor,
