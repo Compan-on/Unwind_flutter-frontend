@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "../widgets/select_post_tags.dart";
+import '../../widgets/select_post_tags.dart';
 
 class CreatePost extends StatefulWidget {
   const CreatePost({Key? key}) : super(key: key);

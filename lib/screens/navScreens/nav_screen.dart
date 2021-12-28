@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import "./home_screen.dart";
+import '../mainScreens/home_screen.dart';
 
-import "../widgets/user_drawer.dart";
+import '../../widgets/user_drawer.dart';
 
 class NavScreen extends StatefulWidget {
   const NavScreen({Key? key}) : super(key: key);

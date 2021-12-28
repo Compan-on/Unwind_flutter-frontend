@@ -3,7 +3,7 @@
 
 import 'package:companion/screens/authScreens/welcome_page.dart';
 import 'package:companion/screens/authScreens/sign_in_page.dart';
-import "../screens/nav_screen.dart";
+import '../screens/navScreens/nav_screen.dart';
 import 'package:flutter/material.dart';
 
 class Navigate {

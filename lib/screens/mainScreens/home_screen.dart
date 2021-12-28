@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "../widgets/post.dart";
+import '../../widgets/post.dart';
 import 'create_post.dart';
 
 class HomeScreen extends StatefulWidget {
