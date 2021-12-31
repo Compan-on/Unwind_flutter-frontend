@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import '../../widgets/select_post_tags.dart';
-
 class CreatePost extends StatefulWidget {
   const CreatePost({Key? key}) : super(key: key);
 
@@ -35,7 +33,7 @@ class _CreatePostState extends State<CreatePost> {
                     onChanged: (value) => {},
                     maxLines: 7,
                     controller: postController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         labelText: "How are you feeling ?",
                         alignLabelWithHint: true),
                     validator: (value) {
@@ -45,8 +43,7 @@ class _CreatePostState extends State<CreatePost> {
                       return null;
                     },
                   ),
-                  Divider(),
-                  SelectPostTags(),
+                  const Divider(),
                 ],
               ),
             ),
