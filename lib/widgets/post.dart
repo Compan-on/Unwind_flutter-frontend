@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Post extends StatefulWidget {
-  final postText;
-  Post(this.postText);
-  // const Post({Key? key, p}) : super(key: key);
+  final Map post;
+  Post(this.post);
 
   @override
   _PostState createState() => _PostState();
@@ -17,19 +16,18 @@ class _PostState extends State<Post> {
         children: [
           ListTile(
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),
+              backgroundImage: NetworkImage(widget.post["userAvatar"]),
             ),
-            title: Text("Shivam Arora"),
+            title: Text(widget.post["userName"]),
           ),
           ListTile(
             title: Text(
-              widget.postText,
+              widget.post["postContent"],
               textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.turned_in_not),
             trailing: Icon(Icons.message_outlined),
           ),
