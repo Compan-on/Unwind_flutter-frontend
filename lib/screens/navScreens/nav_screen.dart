@@ -18,8 +18,8 @@ class _NavScreenState extends State<NavScreen> {
 
   var screens = [
     HomeScreen(),
-    Container(child: const Center(child: const Text("Coming Soon"))),
-    Container(child: const Center(child: const Text("Coming Soon"))),
+    Container(child: const Center(child: Text("Coming Soon"))),
+    Container(child: const Center(child: Text("Coming Soon"))),
   ];
 
   @override
@@ -35,7 +35,8 @@ class _NavScreenState extends State<NavScreen> {
             title: const Text("UnW;nd"),
             centerTitle: true,
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.message_rounded)),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.message_rounded)),
             ],
           ),
           drawer: UserDrawer(),
@@ -48,7 +49,7 @@ class _NavScreenState extends State<NavScreen> {
               });
             },
             type: BottomNavigationBarType.fixed,
-            items: [
+            items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
               BottomNavigationBarItem(
                   icon: Icon(Icons.library_books), label: ""),
