@@ -31,23 +31,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: _loading
           ? const Center(
-              child: const CircularProgressIndicator(),
+              child: CircularProgressIndicator(),
             )
           : RefreshIndicator(
               onRefresh: () => _refreshPosts(context),
-              child: ListView.builder(
-                itemBuilder: (_, index) {
-                  return Post(fetchedPosts[index]);
-                },
-                itemCount: fetchedPosts.length,
-              )),
+              child: (fetchedPosts.length == 0
+                  ? const Center(
+                      child: Text("No Posts Available"),
+                    )
+                  : ListView.builder(
+                      itemBuilder: (_, index) {
+                        return Post(fetchedPosts[index]);
+                      },
+                      itemCount: fetchedPosts.length,
+                    ))),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //temp
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => CreatePost()));
         },
-        child: const Icon(Icons.create),
+        child: const Icon(Icons.add),
       ),
     );
   }
