@@ -36,7 +36,7 @@ class _UserDrawerState extends State<UserDrawer> {
         }).then((value) async {
       if (value) {
         FirebaseService service = new FirebaseService();
-        await service.signOutFromGoogle();
+        await service.signOut();
         Navigator.pushReplacementNamed(context, Constants.signInNavigate);
       }
     });
@@ -59,7 +59,9 @@ class _UserDrawerState extends State<UserDrawer> {
           ListTile(
             leading: Icon(Icons.person),
             title: Text("User Profile"),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, Constants.profilePage);
+            },
           ),
           ListTile(
             leading: Icon(Icons.logout),

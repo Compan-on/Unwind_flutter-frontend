@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:companion/services/database.dart';
 import 'package:companion/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class _usernamePageState extends State<usernamePage> {
   bool _isEditing = false;
   bool _isStoring = false;
 
+
+  String imagePath = "assets/images/profileImage01.jpg";
   var name;
 
   String? _validateString(String value) {
@@ -42,7 +45,6 @@ class _usernamePageState extends State<usernamePage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -55,29 +57,15 @@ class _usernamePageState extends State<usernamePage> {
         textFocusNode.unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: Constants.kPrimaryColor,
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, 
                 children: [
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: Constants.textUsername1,
-                          style: TextStyle(
-                            color: Constants.kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
-                          )),
-                      TextSpan(
-                          text: Constants.textUsername2,
-                          style: TextStyle(
-                              color: Constants.kDarkBlueColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40.0)),
-                    ])),
+                    CircleAvatar(
+                      radius: 70,
+                      backgroundImage: AssetImage(imagePath),
+                    ),
                     SizedBox(height: size.height * 0.01),
                     Padding(padding: EdgeInsets.only(bottom: size.height * 0.02)),
                     SizedBox(
@@ -134,19 +122,26 @@ class _usernamePageState extends State<usernamePage> {
             child: OutlinedButton(
               onPressed: textControllerName.text.isNotEmpty
                                 ? () async {
-                                    textFocusNode.unfocus();
+                                  textFocusNode.unfocus();
                                     setState(() {
                                       _isStoring = true;
                                     });
 
+                                  final bool? valid = await usernameCheck(name);
+                                  if(valid!){
+                                    ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(content: Text("Username already exists.Choose another.")));
+                                  }
+                                  else{
+                                    
                                     await database
-                                        .storeUserData(userName: textControllerName.text)
-                                        .whenComplete(() => Navigator.pushNamed(context, Constants.registerPage2))
+                                        .storeUserData(userName: textControllerName.text, profileImage: imagePath)
+                                        .whenComplete(() => Navigator.pushReplacementNamed(context, Constants.homeNavigate))
                                         .catchError(
                                           (e) => print('Error in storing data: $e'),
                                         );
-
-                                    setState(() {
+                                  }
+                                   setState(() {
                                       _isStoring = false;
                                     });
                                   }
@@ -163,5 +158,18 @@ class _usernamePageState extends State<usernamePage> {
           
         ]))));
   }
-  
+
+  Future<bool?> usernameCheck(String username) async {
+    
+    await Future.delayed(Duration(seconds: 1));
+    if(username != name){
+      print('No need to check');
+      return null;
+    }
+    
+    final result = await FirebaseFirestore.instance.collection('username').doc(username).get();
+
+    print('user already exists: ${result.exists}');
+    return result.exists;
+  }
 }

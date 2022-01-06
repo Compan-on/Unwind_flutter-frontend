@@ -11,14 +11,16 @@ class userModel {
     required this.uid,
   });
 
-  userModel.overloadedConstructor(String uid, String name){
+  userModel.overloadedConstructor(String uid, String name, String profileImage){
     this.uid = uid;
     this.name = name;
+    this.profileImage = profileImage;
   }
 
   userModel.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     name = json['name'];
+    profileImage = json['profileImage'];
   }
 
   Map<String, dynamic> toJson() {
@@ -26,6 +28,7 @@ class userModel {
 
     data['uid'] = this.uid;
     data['name'] = this.name;
+    data['profileImage'] = this.profileImage;
 
     return data;
   }

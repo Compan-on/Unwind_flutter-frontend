@@ -32,9 +32,8 @@ class Constants {
   //navigate
   static const signInNavigate = '/sign-in';
   static const homeNavigate = '/home';
-  static const registerPage1 = 'register1';
-  static const registerPage2 = 'register2';
-  static const registerPage3 = 'register3';
+  static const registerPage1 = '/register1';
+  static const profilePage = '/profilePage';
 
   static const statusBarColor = SystemUiOverlayStyle(
       statusBarColor: Constants.kPrimaryColor,

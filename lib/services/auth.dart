@@ -20,47 +20,79 @@ class FirebaseService {
   Stream<userModel?> get user{
     return _auth.authStateChanges().map(_userFromFirebase);
   }
+Future signUp(email, password) async{
 
-  Future<userModel?> signInwithGoogle() async {
-   User? user;
-    final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
+  try{
+    User user = (await _auth.createUserWithEmailAndPassword(
+      email: email, password: password
+    )) as User;
 
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-    try {
-        final UserCredential userCredential =
-              await _auth.signInWithCredential(credential);
-
-        user = userCredential.user;
-        if(userCredential.additionalUserInfo!.isNewUser){
-          if(user != null){
-            usernamePage();
-          }
-        }
-        else{
-          HomeScreen();
-        }
-    } 
-    on FirebaseAuthException catch (e) {
-      print(e.message);
-      throw e;
+    _userFromFirebase(user);
+  } on FirebaseAuthException catch(e){
+    if(e.code == 'weak-password'){
+      print('The password is too weak');
     }
+    else if(e.code == 'email-already-in-use'){
+      print('An account already exists for that email');
+    }
+  } catch(e){
+    print(e);
+  }
+}
 
-    return _userFromFirebase(user);
+ Future signIn(email, password) async {
+    try {
+      User user = (await _auth.signInWithEmailAndPassword(
+          email: email, password: password)) as User;
+
+      _userFromFirebase(user);
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    } catch (e) {
+      print(e);
+    }
+ }
+ Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  // Future<userModel?> signInwithGoogle() async {
+  //  User? user;
+  //   final GoogleSignInAccount? googleSignInAccount =
+  //         await _googleSignIn.signIn();
+
+  //     final GoogleSignInAuthentication googleSignInAuthentication =
+  //         await googleSignInAccount!.authentication;
+
+  //     final AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleSignInAuthentication.accessToken,
+  //       idToken: googleSignInAuthentication.idToken,
+  //     );
+  //   try {
+  //       final UserCredential userCredential =
+  //             await _auth.signInWithCredential(credential);
+
+  //       user = userCredential.user;
+  //   }
+  //   on FirebaseAuthException catch (e) {
+  //     print(e.message);
+  //     throw e;
+  //   }
+
+  //   return _userFromFirebase(user);
     
-  }
+  // }
 
 
-  Future<void> signOutFromGoogle() async{
-    await _googleSignIn.signOut();
-    await _auth.signOut();
-  }
+  // Future<void> signOutFromGoogle() async{
+  //   await _googleSignIn.signOut();
+  //   await _auth.signOut();
+  // }
 
   
 }
