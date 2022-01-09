@@ -27,11 +27,13 @@ class Constants {
   static const textContinue = 'Continue';
   static const textUsername1 = "Enter a name that defines \n";
   static const textUsername2 = "YOU";
+  static const textUserImage = 'Choose how you look';
 
   //navigate
   static const signInNavigate = '/sign-in';
   static const homeNavigate = '/home';
-  static const registerPage1 = 'register1';
+  static const registerPage1 = '/register1';
+  static const profilePage = '/profilePage';
 
   static const statusBarColor = SystemUiOverlayStyle(
       statusBarColor: Constants.kPrimaryColor,
