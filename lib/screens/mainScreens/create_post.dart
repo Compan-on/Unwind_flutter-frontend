@@ -22,7 +22,7 @@ class _CreatePostState extends State<CreatePost> {
     "postContent": ""
   };
 
-  Future<void> _submitPostHandler(postProvider, postData) async {
+  Future<void> _submitPostHandler(postData) async {
     bool isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
@@ -30,7 +30,7 @@ class _CreatePostState extends State<CreatePost> {
               context, "Confirm Save", "Do you want to save this post ?")
           .then((value) async {
         if (value as bool) {
-          await postProvider.addPost(postData);
+          await Provider.of<Posts>(context).addPost(postData);
           showMessageAlert(context, "Post Saved Successfully").then((value) {
             if (value) {
               Navigator.of(context).pop();
@@ -43,31 +43,54 @@ class _CreatePostState extends State<CreatePost> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (ctx) {
-            return Posts();
-          }),
-        ],
-        child: Consumer<Posts>(
-          builder: (ctx, postProvider, child) {
-            return GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: Scaffold(
-                appBar: AppBar(
-                  title: const Text("Create Post"),
-                  actions: [
-                    IconButton(
-                        onPressed: () =>
-                            _submitPostHandler(postProvider, postData),
-                        icon: const Icon(Icons.save)),
-                  ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        backgroundColor: Color.fromRGBO(238, 240, 254, 1),
+        // resizeToAvoidBottomInset: false,
+        // appBar: AppBar(
+        //   title: const Text("Create Post"),
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () => _submitPostHandler(postData),
+        //         icon: const Icon(Icons.save)),
+        //   ],
+        // ),
+        body: SingleChildScrollView(
+          child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(255, 255, 255, 1),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: (Radius.circular(20)),
+                  bottomRight: (Radius.circular(20)),
                 ),
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Form(
-                      key: _formKey,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(10.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const ListTile(
+                      contentPadding: EdgeInsets.all(0),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),
+                      ),
+                      title: Text("Shivam Arora"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 5,
+                        right: 5,
+                      ),
                       child: TextFormField(
                         onChanged: (value) {
                           postData["postContent"] = value;
@@ -75,8 +98,17 @@ class _CreatePostState extends State<CreatePost> {
                         maxLines: 7,
                         controller: postController,
                         decoration: const InputDecoration(
-                            labelText: "How are you feeling ?",
-                            alignLabelWithHint: true),
+                          labelText: "How are you feeling ?",
+                          floatingLabelStyle: TextStyle(
+                            color: Color.fromRGBO(83, 109, 254, 1),
+                          ),
+                          alignLabelWithHint: true,
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromRGBO(83, 109, 254, 1),
+                            ),
+                          ),
+                        ),
                         validator: (value) {
                           if ((value as String).trim().length < 1) {
                             return "Enter Post Content";
@@ -85,12 +117,21 @@ class _CreatePostState extends State<CreatePost> {
                         },
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromRGBO(83, 109, 254, 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text('Post'))
+                  ],
                 ),
-              ),
-            );
-          },
-          // child: ,
-        ));
+              )),
+        ),
+      ),
+    );
   }
 }

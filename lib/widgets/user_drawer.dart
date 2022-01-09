@@ -47,29 +47,64 @@ class _UserDrawerState extends State<UserDrawer> {
     return Drawer(
       child: Column(
         children: [
-          SizedBox(height: AppBar().preferredSize.height),
-          ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),
+          Container(
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(83, 109, 254, 1),
             ),
-            title: Text("Shivam Arora"),
+            child: Column(
+              children: [
+                SizedBox(height: AppBar().preferredSize.height),
+                const ListTile(
+                  // tileColor: Color.fromRGBO(83, 109, 254, 1),
+                  textColor: Colors.white,
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),
+                  ),
+                  title: Text(
+                    "Shivam Arora",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ],
+            ),
           ),
-          Divider(),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text("User Profile"),
+            leading: const Icon(
+              Icons.person,
+              color: Color.fromRGBO(83, 109, 254, 1),
+            ),
+            title: const Text("Profile"),
             onTap: () {
               Navigator.pushReplacementNamed(context, Constants.profilePage);
             },
           ),
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text("Logout"),
+            leading: const Icon(
+              Icons.logout,
+              color: Color.fromRGBO(83, 109, 254, 1),
+            ),
+            title: const Text("Logout"),
             onTap: () {
               confirmLogout(context);
             },
           ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: const Text(
+                  'UnW;ind',
+                  style: TextStyle(
+                    color: Color.fromRGBO(83, 109, 254, 1),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

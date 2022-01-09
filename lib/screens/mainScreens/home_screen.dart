@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final fetchedPosts = Provider.of<Posts>(context).posts;
     return Scaffold(
+      backgroundColor: Color.fromRGBO(238, 240, 254, 1),
       body: _loading
           ? const Center(
               child: CircularProgressIndicator(),
@@ -45,13 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       itemCount: fetchedPosts.length,
                     ))),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CreatePost()));
-        },
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => CreatePost()));
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

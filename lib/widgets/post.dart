@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
 
 class Post extends StatefulWidget {
@@ -13,6 +14,19 @@ class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(255, 255, 255, 1),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 4,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: Column(
         children: [
           ListTile(
@@ -66,7 +80,7 @@ class _PostState extends State<Post> {
           ),
           const ListTile(
             leading: Icon(Icons.turned_in_not),
-            trailing: Icon(Icons.message_outlined),
+            trailing: Icon(Ionicons.ios_paper_plane),
           ),
         ],
       ),

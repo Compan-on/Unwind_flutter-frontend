@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../mainScreens/home_screen.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 import "package:provider/provider.dart";
 import "../../providers/post.dart";
 
 import '../../widgets/user_drawer.dart';
+import "../../widgets/navigation_bar.dart";
 
 class NavScreen extends StatefulWidget {
   const NavScreen({Key? key}) : super(key: key);
@@ -14,14 +15,6 @@ class NavScreen extends StatefulWidget {
 }
 
 class _NavScreenState extends State<NavScreen> {
-  var _selectedIndex = 0;
-
-  var screens = [
-    HomeScreen(),
-    Container(child: const Center(child: Text("Coming Soon"))),
-    Container(child: const Center(child: Text("Coming Soon"))),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -31,32 +24,18 @@ class _NavScreenState extends State<NavScreen> {
           }),
         ],
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text("UnW;nd"),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.message_rounded)),
-            ],
-          ),
-          drawer: UserDrawer(),
-          body: screens[_selectedIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _selectedIndex,
-            onTap: (i) {
-              setState(() {
-                _selectedIndex = i;
-              });
-            },
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.library_books), label: ""),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.medical_services), label: ""),
-            ],
-          ),
-        ));
+            appBar: AppBar(
+                iconTheme:
+                    const IconThemeData(color: Color.fromRGBO(0, 0, 0, 1)),
+                title: const Text("UnW;nd",
+                    style: TextStyle(color: Color.fromRGBO(83, 109, 254, 1))),
+                centerTitle: true,
+                backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+                actions: [
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(AntDesign.message1)),
+                ]),
+            drawer: UserDrawer(),
+            body: NavigationBarUnwind()));
   }
 }
