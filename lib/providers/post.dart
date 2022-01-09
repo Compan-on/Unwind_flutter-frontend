@@ -22,6 +22,7 @@ class Posts with ChangeNotifier {
       final List loadedPosts = [];
       extractedData.forEach((post) {
         loadedPosts.add({
+          "_id": post["_id"],
           "userID": post["userID"],
           "userName": post["userName"],
           "userAvatar": post["userAvatar"],
@@ -57,4 +58,6 @@ class Posts with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> deletePost(String postID) async {}
 }

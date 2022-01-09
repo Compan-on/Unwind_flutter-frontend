@@ -22,7 +22,7 @@ class _PostState extends State<Post> {
             title: Text(widget.post["userName"]),
             trailing: PopupMenuButton(
               child: const Icon(Icons.more_vert),
-              onSelected: (result) {},
+              // onSelected: (result) {},
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                 PopupMenuItem(
                   value: "Edit",
@@ -36,6 +36,7 @@ class _PostState extends State<Post> {
                 ),
                 PopupMenuItem(
                   value: "Delete",
+                  onTap: () => {},
                   child: Row(children: const [
                     Icon(Icons.delete),
                     Text(
