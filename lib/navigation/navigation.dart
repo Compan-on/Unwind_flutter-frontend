@@ -1,9 +1,7 @@
-// import 'package:companion/screens/home_page.dart';
-
-import 'package:companion/screens/authScreens/username.dart';
-import 'package:companion/screens/authScreens/welcome_page.dart';
-import 'package:companion/screens/authScreens/sign_in_page.dart';
-import 'package:companion/screens/mainScreens/profile.dart';
+import '../screens/authScreens/username.dart';
+import '../screens/authScreens/welcome_page.dart';
+import '../screens/authScreens/sign_in_page.dart';
+import '../screens/mainScreens/profile.dart';
 import '../screens/navScreens/nav_screen.dart';
 import 'package:flutter/material.dart';
 

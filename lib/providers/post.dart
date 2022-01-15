@@ -6,9 +6,14 @@ const baseURL = "http://10.0.2.2:3000/posts";
 
 class Posts with ChangeNotifier {
   List _posts = [];
+  List _user_posts = [];
 
   List get posts {
     return [..._posts];
+  }
+
+  List get user_posts {
+    return [..._user_posts];
   }
 
   Future<void> fetchAndSetPosts() async {
@@ -29,7 +34,6 @@ class Posts with ChangeNotifier {
           "postContent": post["postContent"],
           "created_at": post["created_at"]
         });
-        // print(post["created_at"] as String);
       });
       _posts = loadedPosts;
       notifyListeners();
@@ -59,5 +63,46 @@ class Posts with ChangeNotifier {
     }
   }
 
-  Future<void> deletePost(String postID) async {}
+  Future<void> deletePost(String postID) async {
+    final url = Uri.parse(baseURL + "/${postID}");
+    try {
+      final res = await http.delete(url);
+      _posts.removeWhere((post) {
+        return post["_id"] == postID;
+      });
+      notifyListeners();
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
+  }
+  //EDIT POST
+
+  //USER POSTS
+  Future<void> fetchAndSetUserPosts(String userID) async {
+    final url = Uri.parse(baseURL + "/" + userID);
+    try {
+      final res = await http.get(url);
+      final extractedData = convert.jsonDecode(res.body) as List;
+      if (extractedData == null) {
+        return;
+      }
+      final List loadedPosts = [];
+      extractedData.forEach((post) {
+        loadedPosts.add({
+          "_id": post["_id"],
+          "userID": post["userID"],
+          "userName": post["userName"],
+          "userAvatar": post["userAvatar"],
+          "postContent": post["postContent"],
+          "created_at": post["created_at"]
+        });
+      });
+      _user_posts = loadedPosts;
+      notifyListeners();
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
+  }
 }

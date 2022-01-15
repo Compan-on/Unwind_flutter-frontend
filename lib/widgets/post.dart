@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import "../providers/post.dart";
+import "./alert.dart";
 
 class Post extends StatefulWidget {
   final Map post;
@@ -11,6 +14,17 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  Future<void> _deleteHandler(String postID) async {
+    returnAlertValue(
+            context, "Confirm Delete", "Do you want to delete this post ?")
+        .then((value) async {
+      if (value) {
+        await Provider.of<Posts>(context, listen: false).deletePost(postID);
+        showMessageAlert(context, "Post Deleted Successfully");
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +50,6 @@ class _PostState extends State<Post> {
             title: Text(widget.post["userName"]),
             trailing: PopupMenuButton(
               child: const Icon(Icons.more_vert),
-              // onSelected: (result) {},
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                 PopupMenuItem(
                   value: "Edit",
@@ -50,7 +63,7 @@ class _PostState extends State<Post> {
                 ),
                 PopupMenuItem(
                   value: "Delete",
-                  onTap: () => {},
+                  onTap: () => _deleteHandler(widget.post["_id"]),
                   child: Row(children: const [
                     Icon(Icons.delete),
                     Text(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:companion/services/auth.dart';
 import 'package:companion/utils/constants.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class UserDrawer extends StatefulWidget {
   const UserDrawer({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class _UserDrawerState extends State<UserDrawer> {
           ),
           ListTile(
             leading: const Icon(
-              Icons.logout,
+              AntDesign.logout,
               color: Color.fromRGBO(83, 109, 254, 1),
             ),
             title: const Text("Logout"),
@@ -98,8 +99,8 @@ class _UserDrawerState extends State<UserDrawer> {
                   'UnW;ind',
                   style: TextStyle(
                     color: Color.fromRGBO(83, 109, 254, 1),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 25,
+                    fontFamily: "Rancho",
                   ),
                 ),
               ),

@@ -27,3 +27,4 @@ class MyApp extends StatelessWidget {
 
 //error-handling
 //orientation
+//text exceeding size

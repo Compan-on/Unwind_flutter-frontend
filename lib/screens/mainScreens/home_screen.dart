@@ -2,7 +2,8 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "../../providers/post.dart";
 import '../../widgets/post.dart';
-import 'create_post.dart';
+import "../../widgets/user_drawer.dart";
+import 'package:flutter_icons/flutter_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final fetchedPosts = Provider.of<Posts>(context).posts;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 240, 254, 1),
+      backgroundColor: const Color.fromRGBO(238, 240, 254, 1),
       body: _loading
           ? const Center(
               child: CircularProgressIndicator(),
@@ -37,8 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
           : RefreshIndicator(
               onRefresh: () => _refreshPosts(context),
               child: (fetchedPosts.length == 0
-                  ? const Center(
-                      child: Text("No Posts Available"),
+                  ? ListView.builder(
+                      itemBuilder: (_, index) {
+                        return Container(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: const Text("No Post Found"),
+                          alignment: Alignment.center,
+                        );
+                      },
+                      itemCount: 1,
                     )
                   : ListView.builder(
                       itemBuilder: (_, index) {
@@ -46,13 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       itemCount: fetchedPosts.length,
                     ))),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(
-      //         context, MaterialPageRoute(builder: (context) => CreatePost()));
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }

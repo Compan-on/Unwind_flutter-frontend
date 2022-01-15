@@ -5,9 +5,12 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 //screens
 import "../screens/mainScreens/home_screen.dart";
 import "../screens/mainScreens/create_post.dart";
+import "../screens/mainScreens/feed_screen.dart";
 
 class NavigationBarUnwind extends StatefulWidget {
   const NavigationBarUnwind({Key? key}) : super(key: key);
+  // final Function toggleNavbar;
+  // NavigationBarUnwind(this.toggleNavbar);
 
   @override
   _NavigationBarUnwindState createState() => _NavigationBarUnwindState();
@@ -22,9 +25,9 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
     return [
       HomeScreen(),
       Container(child: const Center(child: Text("Coming Soon"))),
-      CreatePost(),
+      Container(),
       Container(child: const Center(child: Text("Coming Soon"))),
-      Container(child: const Center(child: Text("Coming Soon"))),
+      FeedScreen(),
     ];
   }
 
@@ -37,7 +40,7 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Ionicons.md_book),
+        icon: const Icon(Ionicons.ios_book),
         title: "Library",
         activeColorPrimary: Colors.black,
         inactiveColorPrimary: Colors.grey,
@@ -47,6 +50,10 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
         title: " ",
         activeColorPrimary: const Color.fromRGBO(38, 50, 56, 1),
         activeColorSecondary: Colors.white,
+        onPressed: (ctx) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreatePost(false, null)));
+        },
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.medical_services),
@@ -77,6 +84,13 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
       hideNavigationBar: _hideNavBar,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
+      // onItemSelected: (value) {
+      //   if (value == 4) {
+      //     widget.toggleNavbar(false);
+      //   } else {
+      //     widget.toggleNavbar(true);
+      //   }
+      // },
       navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
           ? 0.0
           : kBottomNavigationBarHeight,

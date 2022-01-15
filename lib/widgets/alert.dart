@@ -11,13 +11,13 @@ Future returnAlertValue(BuildContext context, String msg1, String msg2) {
             FlatButton(
                 textColor: Colors.green,
                 onPressed: () {
-                  Navigator.of(context).pop(true);
+                  Navigator.of(ctx).pop(true);
                 },
                 child: const Text("Confirm")),
             FlatButton(
                 textColor: Colors.red,
                 onPressed: () {
-                  Navigator.of(context).pop(false);
+                  Navigator.of(ctx).pop(false);
                 },
                 child: const Text("Cancel")),
           ],
@@ -35,7 +35,7 @@ Future showMessageAlert(BuildContext context, String msg1) {
             FlatButton(
                 textColor: Colors.green,
                 onPressed: () {
-                  Navigator.of(context).pop(true);
+                  Navigator.of(ctx).pop(true);
                 },
                 child: const Text("OK")),
           ],
