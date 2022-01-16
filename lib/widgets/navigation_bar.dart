@@ -38,6 +38,10 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
         title: "Home",
         activeColorPrimary: Colors.black,
         inactiveColorPrimary: Colors.grey,
+        // routeAndNavigatorSettings: RouteAndNavigatorSettings(
+        //   initialRoute: "/",
+        //   routes: {"/edit_post": (ctx) => CreatePost(false)},
+        // ),
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Ionicons.ios_book),
@@ -52,7 +56,7 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
         activeColorSecondary: Colors.white,
         onPressed: (ctx) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreatePost(false, null)));
+              MaterialPageRoute(builder: (context) => CreatePost(false)));
         },
       ),
       PersistentBottomNavBarItem(
@@ -84,6 +88,7 @@ class _NavigationBarUnwindState extends State<NavigationBarUnwind> {
       hideNavigationBar: _hideNavBar,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
+
       // onItemSelected: (value) {
       //   if (value == 4) {
       //     widget.toggleNavbar(false);

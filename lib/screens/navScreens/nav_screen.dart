@@ -6,6 +6,7 @@ import "../../providers/post.dart";
 
 import '../../widgets/user_drawer.dart';
 import "../../widgets/navigation_bar.dart";
+import "../mainScreens/create_post.dart";
 
 class NavScreen extends StatefulWidget {
   const NavScreen({Key? key}) : super(key: key);
@@ -51,8 +52,13 @@ class _NavScreenState extends State<NavScreen> {
                     ])
               : null,
           drawer: UserDrawer(),
-          // body: NavigationBarUnwind(toggleNavbar),
           body: NavigationBarUnwind(),
+          // body: MaterialApp(
+          //   home: NavigationBarUnwind(),
+          //   routes: {
+          //     "/edit_post": (ctx) => CreatePost(false),
+          //   },
+          // ),
         ));
   }
 }

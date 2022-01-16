@@ -1,8 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import "package:provider/provider.dart";
 import "../../providers/post.dart";
+
+import "../../widgets/feed_post.dart";
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -48,47 +49,17 @@ class _FeedScreenState extends State<FeedScreen> {
                         },
                         itemCount: 1,
                       )
-                    : ListView(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: StaggeredGrid.count(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              children: fetchedPosts.map((post) {
-                                return StaggeredGridTile.count(
-                                  crossAxisCellCount: 1,
-                                  mainAxisCellCount:
-                                      (post["postContent"] as String)
-                                              .split(" ")
-                                              .length /
-                                          28,
-                                  // add calculations for landscape orientation
-                                  child: Container(
-                                      key: Key(post["_id"]),
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromRGBO(
-                                            255, 255, 255, 1),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 4,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      padding: const EdgeInsets.all(8),
-                                      child: Text(post["postContent"])),
-                                );
-                              }).toList(),
-                            ),
-                          )
-                        ],
-                      )),
-              ));
+                    : GridView.count(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        children: fetchedPosts.map((post) {
+                          return FeedPost(post);
+                        }).toList(),
+                        primary: false,
+                        padding: const EdgeInsets.all(20),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.85,
+                      ))));
   }
 }

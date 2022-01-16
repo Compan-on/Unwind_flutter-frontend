@@ -6,8 +6,8 @@ import "../../widgets/alert.dart";
 class CreatePost extends StatefulWidget {
   // const CreatePost({Key? key}) : super(key: key);
   final _editMode;
-  final editPostID;
-  CreatePost(this._editMode, this.editPostID);
+  // final Map post;
+  CreatePost(this._editMode);
 
   @override
   _CreatePostState createState() => _CreatePostState();

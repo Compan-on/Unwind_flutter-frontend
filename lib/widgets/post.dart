@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import "../providers/post.dart";
 import "./alert.dart";
+import "../screens/mainScreens/create_post.dart";
 
 class Post extends StatefulWidget {
   final Map post;
@@ -53,6 +54,12 @@ class _PostState extends State<Post> {
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                 PopupMenuItem(
                   value: "Edit",
+                  onTap: () {
+                    // print("Hello");
+                    // // Navigator.of(context).pop();
+                    // Navigator.of(context).pushNamed("/edit_post");
+                    // print("World");
+                  },
                   child: Row(children: const [
                     Icon(Icons.edit),
                     Text(
@@ -91,9 +98,21 @@ class _PostState extends State<Post> {
               ),
             ),
           ),
-          const ListTile(
-            leading: Icon(Icons.turned_in_not),
-            trailing: Icon(Ionicons.ios_paper_plane),
+          ListTile(
+            leading: GestureDetector(
+              child: (widget.post["likes"] as List)
+                      .contains("rJqzNkAiOAc1bt786Y0z2qGLyT83")
+                  ? const Icon(
+                      FontAwesome.heart,
+                      color: Color.fromRGBO(83, 109, 254, 1),
+                    )
+                  : const Icon(FontAwesome.heart_o),
+              onTap: () async {
+                await Provider.of<Posts>(context, listen: false).toggleLike(
+                    widget.post["_id"], "rJqzNkAiOAc1bt786Y0z2qGLyT83");
+              },
+            ),
+            trailing: const Icon(Ionicons.ios_paper_plane),
           ),
         ],
       ),

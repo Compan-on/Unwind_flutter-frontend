@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: 1,
                     )
                   : ListView.builder(
+                      physics: AlwaysScrollableScrollPhysics(),
                       itemBuilder: (_, index) {
                         return Post(fetchedPosts[index]);
                       },

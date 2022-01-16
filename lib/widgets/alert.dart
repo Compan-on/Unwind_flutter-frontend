@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:intl/intl.dart';
 
 Future returnAlertValue(BuildContext context, String msg1, String msg2) {
   return showDialog(
@@ -38,6 +39,43 @@ Future showMessageAlert(BuildContext context, String msg1) {
                   Navigator.of(ctx).pop(true);
                 },
                 child: const Text("OK")),
+          ],
+        );
+      });
+}
+
+Future showFeedAlert(BuildContext context, Map post) {
+  return showDialog(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    post["postContent"],
+                    textAlign: TextAlign.justify,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    DateFormat.yMMMMd()
+                        .format(DateTime.parse(post["created_at"]))
+                        .toString(),
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         );
       });

@@ -32,7 +32,8 @@ class Posts with ChangeNotifier {
           "userName": post["userName"],
           "userAvatar": post["userAvatar"],
           "postContent": post["postContent"],
-          "created_at": post["created_at"]
+          "created_at": post["created_at"],
+          "likes": post["likes"] ?? []
         });
       });
       _posts = loadedPosts;
@@ -95,10 +96,34 @@ class Posts with ChangeNotifier {
           "userName": post["userName"],
           "userAvatar": post["userAvatar"],
           "postContent": post["postContent"],
-          "created_at": post["created_at"]
+          "created_at": post["created_at"],
+          "likes": post["likes"] ?? []
         });
       });
       _user_posts = loadedPosts;
+      notifyListeners();
+    } catch (err) {
+      print(err);
+      rethrow;
+    }
+  }
+
+  //toggle likes
+  Future<void> toggleLike(String postID, String userID) async {
+    final url = Uri.parse(baseURL + "/" + postID + "/" + userID);
+    try {
+      final res = await http.post(
+        url,
+        body: convert.jsonEncode({}),
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        encoding: convert.Encoding.getByName("utf-8"),
+      );
+      int index = _posts.indexWhere((post) => post["_id"] == postID);
+      if ((_posts[index]["likes"] as List).contains(userID)) {
+        (_posts[index]["likes"] as List).remove(userID);
+      } else {
+        (_posts[index]["likes"] as List).add(userID);
+      }
       notifyListeners();
     } catch (err) {
       print(err);
