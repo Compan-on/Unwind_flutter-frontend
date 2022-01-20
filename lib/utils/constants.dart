@@ -14,7 +14,7 @@ class Constants {
   static const title = "Google Sign In";
   static const textIntro = "Sharing how you feel \n";
   static const textIntroDesc1 = "is easier \n ";
-  static const textIntroDesc2 = "than you think!";
+  static const textIntroDesc2 = "than ever!";
   static const textSmallSignUp = "Sign up takes only 2 minutes!";
   static const textSignIn = "Sign In";
   static const textStart = "Continue";
@@ -22,7 +22,7 @@ class Constants {
   static const textSmallSignIn = "We are here to listen";
   static const textSignInGoogle = "Sign In With Google";
   static const textAcc = "Don't have an account? ";
-  static const textSignUp = "Sign Up here";
+  static const textSignUp = "Sign Up";
   static const textHome = "Home";
   static const textContinue = 'Continue';
   static const textUsername1 = "Enter a name that defines \n";
@@ -30,7 +30,7 @@ class Constants {
   static const textUserImage = 'Choose how you look';
 
   //navigate
-  static const signInNavigate = '/sign-in';
+  static const signInNavigate = '/authenticate';
   static const homeNavigate = '/home';
   static const registerPage1 = '/register1';
   static const profilePage = '/profilePage';

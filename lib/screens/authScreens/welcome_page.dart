@@ -1,13 +1,15 @@
+import 'package:companion/models/user.dart';
 import 'package:companion/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    User? result = FirebaseAuth.instance.currentUser;
+    final result = Provider.of<userModel?>(context);
     return Scaffold(
         backgroundColor: Constants.kPrimaryColor,
         body: AnnotatedRegion<SystemUiOverlayStyle>(

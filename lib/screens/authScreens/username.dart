@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:companion/services/database.dart';
 import 'package:companion/utils/constants.dart';
+import 'package:companion/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -130,7 +131,8 @@ class _usernamePageState extends State<usernamePage> {
                                   final bool? valid = await usernameCheck(name);
                                   if(valid!){
                                     ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(content: Text("Username already exists.Choose another.")));
+                                    .showSnackBar(SnackBar(content: 
+                                      Text("Username already exists.Choose another.")));
                                   }
                                   else{
                                     
@@ -140,6 +142,9 @@ class _usernamePageState extends State<usernamePage> {
                                         .catchError(
                                           (e) => print('Error in storing data: $e'),
                                         );
+                                    await UserPreferences.storeUsername(textControllerName.text);
+                                    await UserPreferences.storeProfileURL(imagePath);
+
                                   }
                                    setState(() {
                                       _isStoring = false;
@@ -167,9 +172,21 @@ class _usernamePageState extends State<usernamePage> {
       return null;
     }
     
-    final result = await FirebaseFirestore.instance.collection('username').doc(username).get();
-
-    print('user already exists: ${result.exists}');
-    return result.exists;
+    //final result = await FirebaseFirestore.instance.collection('users').get();
+    final QuerySnapshot result = await Future.value(FirebaseFirestore.instance
+          .collection('users')
+          .where('name', isEqualTo: username)
+          .limit(1)
+          .get());
+    
+    final List<DocumentSnapshot> documents = result.docs;
+    if(documents.length == 1){
+      print("Username already exists");
+      return false;
+    }
+    else{
+      print("Username available");
+      return true;
+    }
   }
 }

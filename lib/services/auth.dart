@@ -23,33 +23,30 @@ class FirebaseService {
 Future signUp(email, password) async{
 
   try{
-    User user = (await _auth.createUserWithEmailAndPassword(
-      email: email, password: password
-    )) as User;
-
-    _userFromFirebase(user);
-  } on FirebaseAuthException catch(e){
-    if(e.code == 'weak-password'){
-      print('The password is too weak');
+     UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebase(user);
+  }  on FirebaseAuthException catch (e) {
+      print(e.toString());
+      return null;
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
-    else if(e.code == 'email-already-in-use'){
-      print('An account already exists for that email');
-    }
-  } catch(e){
-    print(e);
-  }
 }
 
  Future signIn(email, password) async {
     try {
-      User user = (await _auth.signInWithEmailAndPassword(
-          email: email, password: password)) as User;
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebase(user);
 
-      _userFromFirebase(user);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      print(e.toString());
+      return null;
     } catch (e) {
-      print(e);
+      print(e.toString());
+      return null;
     }
  }
  Future signOut() async {

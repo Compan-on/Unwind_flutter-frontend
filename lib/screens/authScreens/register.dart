@@ -4,16 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignInPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   
   final Function toggleView;
-  SignInPage({required this.toggleView});
+  RegisterPage({required this.toggleView});
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _RegisterPageState extends State<RegisterPage> {
   FirebaseService _authService = FirebaseService();
 
   bool isLoading = false;
@@ -133,22 +133,21 @@ class _SignInPageState extends State<SignInPage> {
                       isLoading = true;
                     });
                     if(_formKey.currentState!.validate()){
-                        dynamic result = await _authService.signIn(email, password);
+                        dynamic result = await _authService.signUp(email, password);
                         if(result == null){
                             ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(content: 
-                                      Text("Invalid email or password. Try signing up if you are a new user.")));
+                                      Text("Invalid email or password.")));
+                        }else{
+                          Navigator.pushReplacementNamed(context, Constants.registerPage1);
                         }
-                        else{
-                          Navigator.pushNamed(context, Constants.homeNavigate);
-                         }
                     }
                     
                     setState(() {
                       isLoading = false;
                     });
                                   },
-                                  child: Text(Constants.textSignIn),
+                                  child: Text(Constants.textSignUp),
                                   style: ButtonStyle(
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Constants.kPrimaryColor),
@@ -167,9 +166,9 @@ class _SignInPageState extends State<SignInPage> {
                                   child: Row(
                                     mainAxisAlignment : MainAxisAlignment.center,
                                     children: [
-                                      Text("Do not have an account yet? "),
+                                      Text("Already have an account? "),
                                       Text(
-                                        'Sign up.',
+                                        'Sign in.',
                                         style: TextStyle(
                                           color : Theme.of(context).primaryColor,
                                           fontWeight: FontWeight.w600),
@@ -182,89 +181,4 @@ class _SignInPageState extends State<SignInPage> {
         ));
   }
 
-  // Widget buildRowDivider({required Size size}) {
-  //   return SizedBox(
-  //     width: size.width * 0.8,
-  //     child: Row(children: <Widget>[
-  //       Expanded(child: Divider(color: Constants.kDarkGreyColor)),
-  //       Padding(
-  //           padding: EdgeInsets.only(left: 8.0, right: 8.0),
-  //           child: Text(
-  //             "Or",
-  //             style: TextStyle(color: Constants.kDarkGreyColor),
-  //           )),
-  //       Expanded(child: Divider(color: Constants.kDarkGreyColor)),
-  //     ]),
-  //   );
-  // }
 }
-
-// class GoogleSignIn extends StatefulWidget {
-//   GoogleSignIn({Key? key}) : super(key: key);
-
-//   @override
-//   _GoogleSignInState createState() => _GoogleSignInState();
-// }
-
-// class _GoogleSignInState extends State<GoogleSignIn> {
-//   bool isLoading = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     return !isLoading
-//         ? SizedBox(
-//             width: size.width * 0.8,
-//             child: OutlinedButton.icon(
-//               icon: FaIcon(FontAwesomeIcons.google),
-//               onPressed: () async {
-//                 setState(() {
-//                   isLoading = true;
-//                 });
-//                 FirebaseService service = new FirebaseService();
-//                 try {
-//                   await service.signInwithGoogle();
-//                   Navigator.pushNamed(
-//                       context, Constants.registerPage1);
-//                 } catch (e) {
-//                   if (e is FirebaseAuthException) {
-//                     showMessage(e.message!);
-//                   }
-//                 }
-//                 setState(() {
-//                   isLoading = false;
-//                 });
-//               },
-//               label: Text(
-//                 Constants.textSignInGoogle,
-//                 style: TextStyle(
-//                     color: Constants.kBlackColor, fontWeight: FontWeight.bold),
-//               ),
-//               style: ButtonStyle(
-//                   backgroundColor:
-//                       MaterialStateProperty.all<Color>(Constants.kGreyColor),
-//                   side: MaterialStateProperty.all<BorderSide>(BorderSide.none)),
-//             ),
-//           )
-//         : CircularProgressIndicator();
-//   }
-
-//   void showMessage(String message) {
-//     showDialog(
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             title: Text("Error"),
-//             content: Text(message),
-//             actions: [
-//               TextButton(
-//                 child: Text("Ok"),
-//                 onPressed: () {
-//                   Navigator.of(context).pop();
-//                 },
-//               )
-//             ],
-//           );
-//         });
-//   }
-// }

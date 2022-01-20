@@ -57,7 +57,7 @@ class _UserDrawerState extends State<UserDrawer> {
                 SizedBox(height: AppBar().preferredSize.height),
                 const ListTile(
                   // tileColor: Color.fromRGBO(83, 109, 254, 1),
-                  textColor: Colors.white,
+                  tileColor: Colors.white,
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(
                         "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),

@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 class Database{
 
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
-  final CollectionReference usernameCollection = FirebaseFirestore.instance.collection('usernames');
+  
 
     String? uid = FirebaseAuth.instance.currentUser!.uid;
     storageService _storage = storageService();
@@ -26,7 +26,7 @@ class Database{
      
     DocumentReference documentReferencer = userCollection.doc(uid);
 
-    DocumentReference documentReferencer2 = usernameCollection.doc(userName);
+   
 
     userModel user = userModel.overloadedConstructor(uid!, userName, profileImageURL);
 
@@ -37,10 +37,6 @@ class Database{
     }).catchError((e) => print(e));
 
     
-    await documentReferencer2.set(data).whenComplete(() {
-      print("Username added");
-    }).catchError((e) => print(e));
-      
   }
    userModel? _userFromFirebaseSnapshot(DocumentSnapshot snapshot){
 
