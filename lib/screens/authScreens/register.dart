@@ -48,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Form(
                     key: _formKey,
                     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      SizedBox(height: size.height * 0.5),
+                      SizedBox(height: size.height * 0.1),
                               Image.asset("assets/images/sign-in.png"),
                               RichText(
                                   textAlign: TextAlign.center,

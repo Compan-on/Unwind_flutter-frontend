@@ -49,7 +49,7 @@ class WelcomePage extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () {
                       result == null
-                          ? Navigator.pushNamed(
+                          ? Navigator.pushReplacementNamed(
                               context, Constants.signInNavigate)
                           : Navigator.pushReplacementNamed(
                               context, Constants.homeNavigate);
