@@ -3,6 +3,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import "package:provider/provider.dart";
 import "../../providers/post.dart";
 
+import "package:firebase_auth/firebase_auth.dart";
+
 import "../../widgets/feed_post.dart";
 
 class FeedScreen extends StatefulWidget {
@@ -15,7 +17,7 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreenState extends State<FeedScreen> {
   Future<void> _refreshUserPosts(BuildContext context) async {
     await Provider.of<Posts>(context, listen: false)
-        .fetchAndSetUserPosts("rJqzNkAiOAc1bt786Y0z2qGLyT83");
+        .fetchAndSetUserPosts(FirebaseAuth.instance.currentUser!.uid);
   }
 
   bool _loading = true;

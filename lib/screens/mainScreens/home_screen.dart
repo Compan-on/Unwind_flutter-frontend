@@ -4,6 +4,7 @@ import "../../providers/post.dart";
 import '../../widgets/post.dart';
 import "../../widgets/user_drawer.dart";
 import 'package:flutter_icons/flutter_icons.dart';
+import "package:firebase_auth/firebase_auth.dart";
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -51,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   : ListView.builder(
                       physics: AlwaysScrollableScrollPhysics(),
                       itemBuilder: (_, index) {
-                        return Post(fetchedPosts[index]);
+                        return Post(fetchedPosts[index],
+                            FirebaseAuth.instance.currentUser!.uid);
                       },
                       itemCount: fetchedPosts.length,
                     ))),

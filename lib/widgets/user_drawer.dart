@@ -4,6 +4,8 @@ import 'package:companion/services/auth.dart';
 import 'package:companion/utils/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
+import "package:shared_preferences/shared_preferences.dart";
+
 class UserDrawer extends StatefulWidget {
   const UserDrawer({Key? key}) : super(key: key);
 
@@ -43,6 +45,21 @@ class _UserDrawerState extends State<UserDrawer> {
     });
   }
 
+  String userName = "";
+  String userAvatar = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    SharedPreferences.getInstance().then((s) {
+      print("hello");
+      setState(() {
+        userName = s.getString("name") as String;
+        userAvatar = s.getString("profileImage") as String;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -55,31 +72,30 @@ class _UserDrawerState extends State<UserDrawer> {
             child: Column(
               children: [
                 SizedBox(height: AppBar().preferredSize.height),
-                const ListTile(
+                ListTile(
                   // tileColor: Color.fromRGBO(83, 109, 254, 1),
                   tileColor: Colors.white,
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),
+                    backgroundImage: NetworkImage(userAvatar),
                   ),
                   title: Text(
-                    "Shivam Arora",
-                    style: TextStyle(fontSize: 20),
+                    userName,
+                    style: const TextStyle(fontSize: 20),
                   ),
-                ),
+                )
               ],
             ),
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.person,
-              color: Color.fromRGBO(83, 109, 254, 1),
-            ),
-            title: const Text("Profile"),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, Constants.profilePage);
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(
+          //     Icons.person,
+          //     color: Color.fromRGBO(83, 109, 254, 1),
+          //   ),
+          //   title: const Text("Profile"),
+          //   onTap: () {
+          //     Navigator.pushReplacementNamed(context, Constants.profilePage);
+          //   },
+          // ),
           ListTile(
             leading: const Icon(
               AntDesign.logout,

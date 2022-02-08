@@ -3,6 +3,9 @@ import "package:provider/provider.dart";
 import "../../providers/post.dart";
 import "../../widgets/alert.dart";
 
+import "package:firebase_auth/firebase_auth.dart";
+import "package:shared_preferences/shared_preferences.dart";
+
 class CreatePost extends StatefulWidget {
   // const CreatePost({Key? key}) : super(key: key);
   final _editMode;
@@ -18,10 +21,9 @@ class _CreatePostState extends State<CreatePost> {
   final postController = TextEditingController();
 
   Map<String, dynamic> postData = {
-    "userID": "rJqzNkAiOAc1bt786Y0z2qGLyT83",
-    "userName": "Shivam Arora",
-    "userAvatar":
-        "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg",
+    "userID": "",
+    "userName": "",
+    "userAvatar": "",
     "postContent": ""
   };
 
@@ -42,6 +44,20 @@ class _CreatePostState extends State<CreatePost> {
         }
       });
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    SharedPreferences.getInstance().then((s) {
+      print("hello");
+      setState(() {
+        postData["userID"] = FirebaseAuth.instance.currentUser!.uid;
+        postData["userName"] = s.getString("name");
+        postData["userAvatar"] = s.getString("profileImage");
+        print(postData["userAvatar"]);
+      });
+    });
   }
 
   @override
@@ -92,13 +108,13 @@ class _CreatePostState extends State<CreatePost> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              const ListTile(
-                                contentPadding: EdgeInsets.all(0),
+                              ListTile(
+                                contentPadding: const EdgeInsets.all(0),
                                 leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg"),
+                                  backgroundImage:
+                                      NetworkImage(postData["userAvatar"]),
                                 ),
-                                title: Text("Shivam Arora"),
+                                title: Text(postData["userName"]),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(

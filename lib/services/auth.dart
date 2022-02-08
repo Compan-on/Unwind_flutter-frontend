@@ -9,38 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:companion/models/user.dart';
 
+import "../utils/shared_preferences.dart";
+
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  userModel? _userFromFirebase(User? user){
+  userModel? _userFromFirebase(User? user) {
     return user != null ? userModel(uid: user.uid) : null;
   }
 
-  Stream<userModel?> get user{
+  Stream<userModel?> get user {
     return _auth.authStateChanges().map(_userFromFirebase);
   }
-Future signUp(email, password) async{
 
-  try{
-     UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      User? user = result.user;
-      return _userFromFirebase(user);
-  }  on FirebaseAuthException catch (e) {
-      print(e.toString());
-      return null;
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-}
-
- Future signIn(email, password) async {
+  Future signUp(email, password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       User? user = result.user;
       return _userFromFirebase(user);
-
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       return null;
@@ -48,9 +36,44 @@ Future signUp(email, password) async{
       print(e.toString());
       return null;
     }
- }
- Future signOut() async {
+  }
+
+  Future signIn(email, password) async {
     try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+
+      /////
+      final userObject = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .get();
+
+      final userName = userObject.data()!["name"];
+      final profileImage = userObject.data()!["profileImage"];
+
+      await UserPreferences.storeUsername(userName);
+      await UserPreferences.storeProfileURL(profileImage);
+
+      /////
+
+      return _userFromFirebase(user);
+    } on FirebaseAuthException catch (e) {
+      print(e.toString());
+      return null;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future signOut() async {
+    try {
+      ///
+      await UserPreferences.removeUserInfo();
+
+      ///
       return await _auth.signOut();
     } catch (e) {
       print(e.toString());
@@ -82,15 +105,12 @@ Future signUp(email, password) async{
   //   }
 
   //   return _userFromFirebase(user);
-    
-  // }
 
+  // }
 
   // Future<void> signOutFromGoogle() async{
   //   await _googleSignIn.signOut();
   //   await _auth.signOut();
   // }
 
-  
 }
-

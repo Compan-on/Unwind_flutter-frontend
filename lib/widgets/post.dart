@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 import "../providers/post.dart";
 import "./alert.dart";
 import "../screens/mainScreens/create_post.dart";
+import "package:firebase_auth/firebase_auth.dart";
 
 class Post extends StatefulWidget {
   final Map post;
-  Post(this.post);
+  final String userUID;
+  Post(this.post, this.userUID);
 
   @override
   _PostState createState() => _PostState();
@@ -28,6 +30,7 @@ class _PostState extends State<Post> {
 
   @override
   Widget build(BuildContext context) {
+    String userUID = widget.userUID;
     return Container(
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -49,38 +52,40 @@ class _PostState extends State<Post> {
               backgroundImage: NetworkImage(widget.post["userAvatar"]),
             ),
             title: Text(widget.post["userName"]),
-            trailing: PopupMenuButton(
-              child: const Icon(Icons.more_vert),
-              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                PopupMenuItem(
-                  value: "Edit",
-                  onTap: () {
-                    // print("Hello");
-                    // // Navigator.of(context).pop();
-                    // Navigator.of(context).pushNamed("/edit_post");
-                    // print("World");
-                  },
-                  child: Row(children: const [
-                    Icon(Icons.edit),
-                    Text(
-                      ' Edit',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ]),
-                ),
-                PopupMenuItem(
-                  value: "Delete",
-                  onTap: () => _deleteHandler(widget.post["_id"]),
-                  child: Row(children: const [
-                    Icon(Icons.delete),
-                    Text(
-                      ' Delete',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ]),
-                ),
-              ],
-            ),
+            trailing: widget.post["userID"] == userUID
+                ? PopupMenuButton(
+                    child: const Icon(Icons.more_vert),
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                      PopupMenuItem(
+                        value: "Edit",
+                        onTap: () {
+                          // print("Hello");
+                          // // Navigator.of(context).pop();
+                          // Navigator.of(context).pushNamed("/edit_post");
+                          // print("World");
+                        },
+                        child: Row(children: const [
+                          Icon(Icons.edit),
+                          Text(
+                            ' Edit',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ]),
+                      ),
+                      PopupMenuItem(
+                        value: "Delete",
+                        onTap: () => _deleteHandler(widget.post["_id"]),
+                        child: Row(children: const [
+                          Icon(Icons.delete),
+                          Text(
+                            ' Delete',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  )
+                : null,
           ),
           ListTile(
             title: Text(
@@ -100,19 +105,20 @@ class _PostState extends State<Post> {
           ),
           ListTile(
             leading: GestureDetector(
-              child: (widget.post["likes"] as List)
-                      .contains("rJqzNkAiOAc1bt786Y0z2qGLyT83")
+              child: (widget.post["likes"] as List).contains(userUID)
                   ? const Icon(
                       FontAwesome.heart,
                       color: Color.fromRGBO(83, 109, 254, 1),
                     )
                   : const Icon(FontAwesome.heart_o),
               onTap: () async {
-                await Provider.of<Posts>(context, listen: false).toggleLike(
-                    widget.post["_id"], "rJqzNkAiOAc1bt786Y0z2qGLyT83");
+                await Provider.of<Posts>(context, listen: false)
+                    .toggleLike(widget.post["_id"], userUID);
               },
             ),
-            trailing: const Icon(Ionicons.ios_paper_plane),
+            trailing: widget.post["userID"] != userUID
+                ? const Icon(Ionicons.ios_paper_plane)
+                : null,
           ),
         ],
       ),

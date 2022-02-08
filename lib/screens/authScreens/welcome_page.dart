@@ -42,7 +42,6 @@ class WelcomePage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: 30.0)),
                     ])),
-                    
                 SizedBox(height: size.height * 0.1),
                 SizedBox(
                   width: size.width * 0.8,
