@@ -2,7 +2,7 @@ import "package:flutter/foundation.dart";
 import "package:http/http.dart" as http;
 import "dart:convert" as convert;
 
-const baseURL = "http://10.0.2.2:3000/posts";
+const baseURL = "https://boiling-tundra-84392.herokuapp.com/posts";
 
 class Posts with ChangeNotifier {
   List _posts = [];
