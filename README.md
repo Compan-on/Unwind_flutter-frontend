@@ -5,6 +5,7 @@ It is an emotional wellness application, part of the poject Unwind, that fosters
 # User research analysis. 
 This includes User Research and insights on willingess to use such a platform, the amount users are willing to pay, Gender and age analysis, demography factor analysis etc.
 [Report](https://docs.google.com/document/d/1sbSh99--SSCfvNJ1eSq6MfPQF576sD0vKXprL9EcS3E/edit)
+
 The data collected through google forms gave us some interesting insights some which are here and a detailed analysis can be found in the report linked above.
 
 ![image](https://user-images.githubusercontent.com/56698924/226925777-591204fa-6d9e-4bd4-9fcb-90b9a2a6af2d.png)
@@ -13,7 +14,8 @@ The data collected through google forms gave us some interesting insights some w
 ![image](https://user-images.githubusercontent.com/56698924/226925297-94c09362-7d3e-46ba-9298-7e8b9a688e9c.png)
 ![image](https://user-images.githubusercontent.com/56698924/226925523-557c482c-48c3-48ec-93b3-34151e79387d.png)
 
-These insights helped us make informed decisions when formulating the business plan, value proposition and go to makrket strategy for the application.
+**These insights helped us make informed decisions when formulating the business plan, value proposition and go to makrket strategy for the application.
+**
 
 # App Designs
 ![image](https://user-images.githubusercontent.com/56698924/226918010-914ce50f-3254-47a5-843c-be847f86d377.png)
