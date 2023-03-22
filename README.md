@@ -8,13 +8,14 @@ This includes User Research and insights on willingess to use such a platform, t
 
 The data collected through google forms gave us some interesting insights some which are here and a detailed analysis can be found in the report linked above.
 
+**These insights helped us make informed decisions when formulating the business plan, value proposition and a go to market strategy for the application.**
+
 ![image](https://user-images.githubusercontent.com/56698924/226925777-591204fa-6d9e-4bd4-9fcb-90b9a2a6af2d.png)
 ![image](https://user-images.githubusercontent.com/56698924/226924677-9472c03d-a0b0-46a9-b691-fe167bb36150.png)
 ![image](https://user-images.githubusercontent.com/56698924/226924911-90f073e8-8dbb-4019-b921-cc0e2c025b9e.png)
 ![image](https://user-images.githubusercontent.com/56698924/226925297-94c09362-7d3e-46ba-9298-7e8b9a688e9c.png)
 ![image](https://user-images.githubusercontent.com/56698924/226925523-557c482c-48c3-48ec-93b3-34151e79387d.png)
 
-**These insights helped us make informed decisions when formulating the business plan, value proposition and go to makrket strategy for the application.**
 
 # App Designs
 ![image](https://user-images.githubusercontent.com/56698924/226918010-914ce50f-3254-47a5-843c-be847f86d377.png)
