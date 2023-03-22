@@ -14,8 +14,7 @@ The data collected through google forms gave us some interesting insights some w
 ![image](https://user-images.githubusercontent.com/56698924/226925297-94c09362-7d3e-46ba-9298-7e8b9a688e9c.png)
 ![image](https://user-images.githubusercontent.com/56698924/226925523-557c482c-48c3-48ec-93b3-34151e79387d.png)
 
-**These insights helped us make informed decisions when formulating the business plan, value proposition and go to makrket strategy for the application.
-**
+**These insights helped us make informed decisions when formulating the business plan, value proposition and go to makrket strategy for the application.**
 
 # App Designs
 ![image](https://user-images.githubusercontent.com/56698924/226918010-914ce50f-3254-47a5-843c-be847f86d377.png)
