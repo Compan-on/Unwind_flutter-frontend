@@ -17,7 +17,7 @@ The data collected through google forms gave us some interesting insights some w
 ![image](https://user-images.githubusercontent.com/56698924/226925523-557c482c-48c3-48ec-93b3-34151e79387d.png)
 
 
-# App Designs
+# App User Interface
 ![image](https://user-images.githubusercontent.com/56698924/226918010-914ce50f-3254-47a5-843c-be847f86d377.png)
 ![image](https://user-images.githubusercontent.com/56698924/226923448-c1ca552e-c644-4fcf-956d-f0b371e42e89.png)
 ![image](https://user-images.githubusercontent.com/56698924/226923578-c46ce7ee-764d-48c7-ad48-213413b35e3f.png)
